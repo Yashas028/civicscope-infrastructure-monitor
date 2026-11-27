@@ -1,23 +1,19 @@
 services:
   - type: web
-    name: civicscope-infrastructure-monitor
-    runtime: node
-    plan: 0.5c-512mb
-    buildCommand: bash render-build.sh
-    startCommand: cd app && npm start
-    healthCheckPath: /healthz
-    disk:
-      name: civicscope-data
-      mountPath: /var/data
-      sizeGB: 1
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: DATA_DIRECTORY
-        value: /var/data
-      - key: ADMIN_EMAIL
-        sync: false
-      - key: ADMIN_PASSWORD
-        sync: false
-      - key: SESSION_SECRET
-        generateValue: true
+      name: civicscope-infrastructure-monitor
+          runtime: node
+              plan: free
+                  buildCommand: bash render-build.sh
+                      startCommand: cd app && npm start
+                          healthCheckPath: /healthz
+                              envVars:
+                                    - key: NODE_ENV
+                                            value: production
+                                                  - key: DATA_DIRECTORY
+                                                          value: /tmp/civicscope-data
+                                                                - key: ADMIN_EMAIL
+                                                                        sync: false
+                                                                              - key: ADMIN_PASSWORD
+                                                                                      sync: false
+                                                                                            - key: SESSION_SECRET
+                                                                                                    generateValue: true
